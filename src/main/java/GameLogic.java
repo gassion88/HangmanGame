@@ -47,15 +47,17 @@ public class GameLogic {
     }
 
     private void startGameRound() {
-        initGameData();
-
-        controller.viewStartGameInputChar();
         String game_state;
+
+        initGameData();
+        controller.viewStartGameInputChar();
 
         do {
             game_state = updateGameState(userInput());
 
-            System.out.println("View Game State");
+            controller.viewMaskWord(SECRET_WORD, GUESSED_UNIQ_CHARS);
+            controller.viewErrorChars(ERROR_CHARS);
+            controller.viewHung(ERROR_CHARS.size());
         } while (true);
     }
 
