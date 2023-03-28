@@ -6,6 +6,9 @@ import java.util.Set;
 public class GameLogic {
     private final Scanner scanner = new Scanner(System.in);
     private final Controller controller = new Controller();
+    public static String HAS_BEEN_CHAR = "Эта буква уже была";
+    public static String GAME_OVER = "Игра окончена, вы проиграли!";
+    public static String GAME_WIN = "Победа!";
     public String SECRET_WORD;
     public HashSet<Character> ERROR_CHARS;
     public HashSet<Character> GUESSED_UNIQ_CHARS;
@@ -45,8 +48,48 @@ public class GameLogic {
 
     private void startGameRound() {
         initGameData();
-        System.out.println("Start Game");
 
+        controller.viewStartGameInputChar();
+        String game_state;
+
+        do {
+            game_state = updateGameState(userInput());
+
+            System.out.println("View Game State");
+        } while (true);
+    }
+
+    public String updateGameState(String playerInput) {
+        if (Objects.equals(playerInput, "1")) {
+            controller.viewNewGame();
+        } else if (Objects.equals(playerInput, "2")) {
+            controller.viewExit();
+        }
+
+        playerInputValidation(playerInput);
+
+        if ( ERROR_CHARS.size() > 6 ){
+            return GAME_OVER;
+        } else if ( GUESSED_UNIQ_CHARS.size() ==  SECRET_WORD_UNIQ_CHAR_COUNT ) {
+            return GAME_WIN;
+        }
+
+        return "Game continues";
+    }
+
+    public void playerInputValidation(String playerInput) {
+        do {
+            if ( GUESSED_UNIQ_CHARS.contains(playerInput.charAt(0)) || ERROR_CHARS.contains( playerInput.charAt(0)) ) {
+                System.out.println(HAS_BEEN_CHAR);
+                return;
+            } else if ( SECRET_WORD.contains(playerInput) ) {
+                GUESSED_UNIQ_CHARS.add( playerInput.charAt(0) );
+                return;
+            } else {
+                ERROR_CHARS.add( playerInput.charAt(0) );
+                return;
+            }
+        }while (true);
     }
 
     private void initGameData() {

@@ -9,4 +9,16 @@ public class Controller {
     public String getSecretWord() {
         return dictionary.secretWordChoice();
     }
+
+    public void viewStartGameInputChar() {
+        consoleOutput.startGameInputChar();
+    }
+
+    public void viewNewGame() {
+        consoleOutput.newGame();
+    }
+
+    public void viewExit() {
+        consoleOutput.exit();
+    }
 }
