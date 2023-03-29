@@ -47,21 +47,33 @@ public class GameLogic {
     }
 
     private void startGameRound() {
-        String game_state;
-
         initGameData();
         controller.viewStartGameInputChar();
 
         do {
-            game_state = updateGameState(userInput());
+            updateGameState(userInput());
 
             controller.viewMaskWord(SECRET_WORD, GUESSED_UNIQ_CHARS);
             controller.viewErrorChars(ERROR_CHARS);
             controller.viewHung(ERROR_CHARS.size());
+
+            if (checkGameState()) return;
         } while (true);
     }
 
-    public String updateGameState(String playerInput) {
+    private boolean checkGameState() {
+        if ( ERROR_CHARS.size() > 6 ){
+            System.out.println("Game Over");
+            return true;
+        } else if ( GUESSED_UNIQ_CHARS.size() ==  SECRET_WORD_UNIQ_CHAR_COUNT ) {
+            System.out.println("Game Win");
+            return true;
+        }
+
+        return false;
+    }
+
+    public void updateGameState(String playerInput) {
         if (Objects.equals(playerInput, "1")) {
             controller.viewNewGame();
         } else if (Objects.equals(playerInput, "2")) {
@@ -69,14 +81,6 @@ public class GameLogic {
         }
 
         playerInputValidation(playerInput);
-
-        if ( ERROR_CHARS.size() > 6 ){
-            return GAME_OVER;
-        } else if ( GUESSED_UNIQ_CHARS.size() ==  SECRET_WORD_UNIQ_CHAR_COUNT ) {
-            return GAME_WIN;
-        }
-
-        return "Game continues";
     }
 
     public void playerInputValidation(String playerInput) {
