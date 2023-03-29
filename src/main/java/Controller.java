@@ -34,4 +34,23 @@ public class Controller {
     public void viewErrorChars(HashSet<Character> errorChars) {
         consoleOutput.errorChars(errorChars);
     }
+
+    public void viewGameOver() {
+        consoleOutput.gameOver();
+    }
+    public void viewGameWin() {
+        consoleOutput.gameWin();
+    }
+
+    public void viewEnterNumber() {
+        consoleOutput.enterNumber();
+    }
+
+    public void viewEnterOneCharacter() {
+        consoleOutput.enterOneCharacter();
+    }
+
+    public void viewHasBeenChar() {
+        consoleOutput.hasBeenChar();
+    }
 }

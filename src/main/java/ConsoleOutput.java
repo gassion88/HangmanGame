@@ -44,4 +44,24 @@ public class ConsoleOutput {
         System.out.println("Mistakes: " + errorChars + " " + errorChars.size());
 
     }
+
+    public void gameWin() {
+        System.out.println("Game Win");
+    }
+
+    public void gameOver() {
+        System.out.println("Game Over");
+    }
+
+    public void enterNumber() {
+        System.out.println("Enter number 1-2");
+    }
+
+    public void enterOneCharacter() {
+        System.out.println("Enter one character");
+    }
+
+    public void hasBeenChar() {
+        System.out.println("This letter has already been");
+    }
 }
