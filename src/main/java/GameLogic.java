@@ -50,10 +50,9 @@ public class GameLogic {
         controller.viewStartGameInputChar();
         viewGameState();
 
-        while (true) {
+        while (checkGameState()) {
             updateGameState(userInput());
             viewGameState();
-            if (checkGameState()) return;
         }
     }
 
@@ -66,13 +65,13 @@ public class GameLogic {
     private boolean checkGameState() {
         if ( ERROR_CHARS.size() > 6 ){
             controller.viewGameOver();
-            return true;
+            return false;
         } else if ( GUESSED_UNIQ_CHARS.size() ==  SECRET_WORD_UNIQ_CHAR_COUNT ) {
             controller.viewGameWin();
-            return true;
+            return false;
         }
 
-        return false;
+        return true;
     }
 
     public void updateGameState(String playerInput) {
