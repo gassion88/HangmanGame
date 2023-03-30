@@ -49,12 +49,11 @@ public class GameLogic {
         controller.viewStartGameInputChar();
 
         do {
-            updateGameState(userInput());
-
             controller.viewMaskWord(SECRET_WORD, GUESSED_UNIQ_CHARS);
             controller.viewErrorChars(ERROR_CHARS);
             controller.viewHung(ERROR_CHARS.size());
 
+            updateGameState(userInput());
             if (checkGameState()) return;
         } while (true);
     }
