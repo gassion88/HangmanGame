@@ -82,18 +82,13 @@ public class GameLogic {
     }
 
     public void playerInputValidation(String playerInput) {
-        do {
             if ( GUESSED_UNIQ_CHARS.contains(playerInput.charAt(0)) || ERROR_CHARS.contains( playerInput.charAt(0)) ) {
                 controller.viewHasBeenChar();
-                return;
             } else if ( SECRET_WORD.contains(playerInput) ) {
                 GUESSED_UNIQ_CHARS.add( playerInput.charAt(0) );
-                return;
             } else {
-                ERROR_CHARS.add( playerInput.charAt(0) );
-                return;
+                ERROR_CHARS.add(playerInput.charAt(0));
             }
-        }while (true);
     }
 
     private void initGameData() {
