@@ -46,16 +46,21 @@ public class GameLogic {
 
     private void startGameRound() {
         initGameData();
+
         controller.viewStartGameInputChar();
+        viewGameState();
 
-        do {
-            controller.viewMaskWord(SECRET_WORD, GUESSED_UNIQ_CHARS);
-            controller.viewErrorChars(ERROR_CHARS);
-            controller.viewHung(ERROR_CHARS.size());
-
+        while (true) {
             updateGameState(userInput());
+            viewGameState();
             if (checkGameState()) return;
-        } while (true);
+        }
+    }
+
+    private void viewGameState() {
+        controller.viewMaskWord(SECRET_WORD, GUESSED_UNIQ_CHARS);
+        controller.viewErrorChars(ERROR_CHARS);
+        controller.viewHung(ERROR_CHARS.size());
     }
 
     private boolean checkGameState() {
