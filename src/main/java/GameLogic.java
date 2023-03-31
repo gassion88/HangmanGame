@@ -12,14 +12,13 @@ public class GameLogic {
     public int SECRET_WORD_UNIQ_CHAR_COUNT;
 
     public  void launchGame(){
+        String menuInput;
+
         do {
             controller.startMenu();
-            String input = userInput();
 
-            if (validateMenuInput(input)) return;
-        }while (true);
-
-
+            menuInput = userInput();
+        }while (validateMenuInput(menuInput));
     }
 
     private  String userInput() {
@@ -38,10 +37,11 @@ public class GameLogic {
         if ( Objects.equals(input, "1") ) {
             startGameRound();
         } else if (Objects.equals(input, "2")) {
-            return true;
+            return false;
         }
         else controller.viewEnterNumber();
-        return false;
+
+        return true;
     }
 
     private void startGameRound() {
